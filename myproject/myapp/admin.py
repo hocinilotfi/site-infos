@@ -4,6 +4,9 @@ from .models import CustomUser, Post, Comment
 
 # Enregistrement du modèle CustomUser
 class CustomUserAdmin(UserAdmin):
+    form = CustomUserCreationForm
+    add_form = CustomUserCreationForm
+
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'job', 'about_me')}),
@@ -14,13 +17,14 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'password1', 'password2', 'email', 'job', 'about_me')}
+            'fields': ('username', 'password1', 'password2', 'email', 'email2', 'job', 'about_me')}
         ),
     )
 
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('username', 'first_name', 'last_name', 'email')
     ordering = ('username',)
+
 
 # Enregistrement du modèle Post
 class PostAdmin(admin.ModelAdmin):

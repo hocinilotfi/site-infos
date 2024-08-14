@@ -9,20 +9,23 @@ User = get_user_model()
 class UserRegisterSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
+    email2 = serializers.EmailField(write_only=True)  # Nouveau champ pour confirmation de l'email
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'job', 'about_me')
+        fields = ('username', 'email', 'email2', 'password1', 'password2', 'job', 'about_me')
 
     def validate(self, data):
         if data['password1'] != data['password2']:
             raise serializers.ValidationError("Les mots de passe ne correspondent pas.")
+        if data['email'] != data['email2']:
+            raise serializers.ValidationError("Les adresses e-mail ne correspondent pas.")
         return data
 
     def create(self, validated_data):
         user = User(
             username=validated_data['username'],
-            email=validated_data['email'],
+            email=validated_data['email'],  # Utilise l'adresse e-mail confirmée
             job=validated_data.get('job', ''),
             about_me=validated_data.get('about_me', '')
         )
