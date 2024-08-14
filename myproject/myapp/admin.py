@@ -4,8 +4,8 @@ from .models import CustomUser, Post, Comment
 
 # Enregistrement du modèle CustomUser
 class CustomUserAdmin(UserAdmin):
-    form = CustomUserCreationForm
-    add_form = CustomUserCreationForm
+    # form = CustomUserCreationForm
+    # add_form = CustomUserCreationForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
