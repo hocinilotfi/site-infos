@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  siteinfos:
+    image: siteinfos
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8010:8010
